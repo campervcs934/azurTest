@@ -1,3 +1,15 @@
-﻿fileFormatVersion: 2
-guid: ea41f097a4274d298e282f5fa81ffbe1
-timeCreated: 1559002311
+fileFormatVersion: 2
+guid: 02c2d277874f649d18a59d382420bf65
+labels:
+- al_max
+- al_max_export_path-MaxSdk/Scripts/IntegrationManager/Editor/AppLovinMenuItems.cs
+- al_max_export_path-MaxSdk\Scripts\IntegrationManager\Editor\AppLovinMenuItems.cs
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

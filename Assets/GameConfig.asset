@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: GameConfig
   m_EditorClassIdentifier: 
   labyrinthsStr:
-  - Assets/Resources/Prefabs/Labyrinth_tutorial 25.prefab
-  - Assets/Resources/Prefabs/Labyrinth_tutorial 26.prefab
-  - Assets/Resources/Prefabs/Labyrinth_tutorial 27.prefab
+  - Assets/AddOns/Mg3D_Food/1(Clone)(Clone)(Clone) 1 1 1 2.prefab
+  - Assets/Resources/Prefabs/Fruits/Labyrinth_grapes.prefab
+  - Assets/Resources/Prefabs/Fruits/Labyrinth_orange.prefab
   - Assets/Resources/Prefabs/Labyrinth_tutorial 28.prefab
   - Assets/Resources/Prefabs/Labyrinth_tutorial 29.prefab
   - Assets/Resources/Prefabs/Labyrinth_tutorial 30.prefab
@@ -145,8 +145,12 @@ MonoBehaviour:
   - Assets/Resources/Prefabs/Fun/Labyrinth_fun_5.prefab
   - Assets/Resources/Prefabs/Fun/Labyrinth_fun_6.prefab
   - Assets/Resources/Prefabs/Fun/Labyrinth_fun_7.prefab
-  ball: {fileID: 4803738439568453723, guid: ef7f45f562fed4940b8d891a8ea3dc88, type: 3}
-  ballBig: {fileID: 4803738439568453723, guid: b7516d6d81dd31c44af5ec7ddbb50a19, type: 3}
+  balls:
+  - {fileID: 3985225015294940469, guid: 1fb422830cb06944e92f0f98cb90d2b5, type: 3}
+  - {fileID: 2056228458241244561, guid: c706b033feeb5bb4a969cb959ab564f4, type: 3}
+  - {fileID: 2017283427769452485, guid: 6263bc2a87a15274c91fd08429a912c9, type: 3}
+  - {fileID: 4803738439568453723, guid: ef7f45f562fed4940b8d891a8ea3dc88, type: 3}
+  ballBig: {fileID: 4869507687929835288, guid: 6e7beae37865e1a42a5cf8360a5ccf87, type: 3}
   ballMid: {fileID: 4803738439568453723, guid: 6e1e1ab17a5d0ca49aabbbb775f4175e, type: 3}
   wavesCount: 3
   backgroundsStr:

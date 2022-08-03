@@ -13,7 +13,11 @@ public class MainMenu : MonoBehaviour
         playerState.Save();
         SceneManager.LoadScene(1);
     }
+    public void BackToMenu() => SceneManager.LoadScene(2);
 
 
-    
+
+
+
+
 }

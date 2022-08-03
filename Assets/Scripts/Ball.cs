@@ -8,6 +8,8 @@ public class Ball : MonoBehaviour
 
     public Vector3 lastVel;
     public bool isContactBall;
+    //-1 for any level
+    public int appliedLvl;
     private void OnEnable()
     {
         balls.Add(this);    
