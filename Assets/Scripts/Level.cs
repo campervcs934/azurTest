@@ -21,6 +21,7 @@ public class Level : MonoBehaviour, IWaveObserver, ILevelObserver, ICaptureBallO
     public static Level instance;
     public PlayerState playerState;
     public GameConfig gameConfig;
+    public GameObject viewWaterScreen;
 
     public float size = 2f;
 
@@ -378,7 +379,7 @@ public class Level : MonoBehaviour, IWaveObserver, ILevelObserver, ICaptureBallO
         var count = 0;
         for (var d = -deep; d <= deep; d++)
         {
-            for (var j = 0; j < sq*sq; j++)
+            for (var j = 0; j < sq * sq; j++)
             {
                 float scaleFactor = Random.Range(0f, 1f);
                 int ballSize = count % 10;
@@ -386,14 +387,22 @@ public class Level : MonoBehaviour, IWaveObserver, ILevelObserver, ICaptureBallO
                 else if (ballSize < 9) ballSize = 1;
                 else if (ballSize < 10) ballSize = 2;
                 if (count >= max) continue;
-                var ball = Instantiate(ballSize == 2 ? gameConfig.ballBig : ballSize == 1 ? gameConfig.ballMid : gameConfig.ball, newLab.transform);
-                ball.transform.localPosition = Vector3.right * (j % sq - sq / 2) * 0.1f + Vector3.down * (j / sq - sq / 2) * 0.1f + Vector3.forward * d * 0.1f;
+                foreach (var b in gameConfig.balls)
+                {
+                    if (b.appliedLvl == playerState.level || b.appliedLvl == -1){
+                        var ball = Instantiate(b, newLab.transform);
+                        ball.transform.localPosition = Vector3.right * (j % sq - sq / 2) * 0.1f + Vector3.down * (j / sq - sq / 2) * 0.1f + Vector3.forward * d * 0.1f;
 
-                var scale = RemoteSettings.GetFloat(ballSize == 0 ? "ballSize0" : ballSize == 1 ? "ballSize1" : "ballSize2", 1f);
-                ball.transform.localScale *= (scale - 1f) * (totalMax - max) / totalMax + 1f;
+                        var scale = RemoteSettings.GetFloat(ballSize == 0 ? "ballSize0" : ballSize == 1 ? "ballSize1" : "ballSize2", 1f);
+                        ball.transform.localScale *= (scale - 1f) * (totalMax - max) / totalMax + 1f;
 
-                balls.Add(ball);
-                count++;
+                        balls.Add(ball);
+                        count++;
+                    }
+                    
+                   
+                }
+              
             }
         }
 
@@ -511,6 +520,11 @@ public class Level : MonoBehaviour, IWaveObserver, ILevelObserver, ICaptureBallO
 
     public void OnWaveComplete()
     {
+        if (viewWaterScreen != null)
+        {
+            viewWaterScreen.SetActive(false);
+        }
+        
         if (inMove) return;
         var cap = playerState.capturedBalls;
         //playerState.capturedBalls = 0;
@@ -533,6 +547,7 @@ public class Level : MonoBehaviour, IWaveObserver, ILevelObserver, ICaptureBallO
 
         sequence = DOTween.Sequence().AppendInterval(RemoteSettings.GetFloat("FinishDelay", 1.3f)).AppendCallback(() =>
         {
+            
             inMove = true;
             playerState.capturedBalls = 0;
             board1.SetActive(false);
@@ -547,20 +562,22 @@ public class Level : MonoBehaviour, IWaveObserver, ILevelObserver, ICaptureBallO
                 {
                     ball.transform.localPosition = vecDist / vecDist.magnitude * 0.4f;
                 }
+                ball.transform.Rotate(Vector3.up * 90); //for 2d sprite water
             }
 
             if (playerState.capturedBalls >= playerState.totalBalls)
             {
                 playerState.Perfect();
             }
-
+            
             playerState.totalBalls = cap;
-
+            
             //ActivateBalls(activeLab);
             ActivateRoof(activeLab);
-
+            
             labyrinths[al].transform.DORotateQuaternion(Quaternion.Euler(90f, 0f, 0f), 0.8f);
             labyrinths[al].transform.DOLocalMove(labyrinths[al].transform.position + Vector3.up * 3f, 0.8f);
+            
         })
         .Append(
             transform.DOMove(Vector3.up * size * (activeLab+1), 1.5f)
@@ -568,8 +585,10 @@ public class Level : MonoBehaviour, IWaveObserver, ILevelObserver, ICaptureBallO
         .AppendCallback(()=> {
             if(labyrinths[al + 1].isBoss)
             {
+                
                 //Camera.main.transform.DOMoveZ(-16f, 0.8f);
-                labyrinths[al + 1].transform.DOScale(0.65f, 0.8f); 
+                labyrinths[al + 1].transform.DOScale(0.65f, 0.8f);
+                
             }
         })
         .Append(
@@ -584,9 +603,10 @@ public class Level : MonoBehaviour, IWaveObserver, ILevelObserver, ICaptureBallO
 
             SoundSystem.ballsPitcher = 0;
             //ShowAds();
+            viewWaterScreen.SetActive(true);
         });
-        
-        
+       
+
     }
 
     public void OnLevelComplete()

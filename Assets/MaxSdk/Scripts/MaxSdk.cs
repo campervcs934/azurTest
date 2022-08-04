@@ -8,14 +8,17 @@ using System.Runtime.InteropServices;
 
 public class MaxSdk :
 #if UNITY_EDITOR
+    // Check for Unity Editor first since the editor also responds to the currently selected platform.
     MaxSdkUnityEditor
 #elif UNITY_ANDROID
     MaxSdkAndroid
-#else
+#elif UNITY_IPHONE || UNITY_IOS
     MaxSdkiOS
+#else
+    MaxSdkUnityEditor
 #endif
 {
-    private const string _version = "2.4.14";
+    private const string _version = "5.4.5";
 
     /// <summary>
     /// Returns the current plugin version.
