@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GameConfig
   m_EditorClassIdentifier: 
   labyrinthsStr:
-  - Assets/AddOns/Mg3D_Food/1(Clone)(Clone)(Clone) 1 1 1 2.prefab
+  - Assets/Resources/Prefabs/Fruits/Labyrith_wood.prefab
   - Assets/Resources/Prefabs/Fruits/Labyrinth_grapes.prefab
   - Assets/Resources/Prefabs/Fruits/Labyrinth_orange.prefab
   - Assets/Resources/Prefabs/Labyrinth_tutorial 28.prefab

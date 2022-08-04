@@ -520,7 +520,11 @@ public class Level : MonoBehaviour, IWaveObserver, ILevelObserver, ICaptureBallO
 
     public void OnWaveComplete()
     {
-        viewWaterScreen.SetActive(false);
+        if (viewWaterScreen != null)
+        {
+            viewWaterScreen.SetActive(false);
+        }
+        
         if (inMove) return;
         var cap = playerState.capturedBalls;
         //playerState.capturedBalls = 0;
